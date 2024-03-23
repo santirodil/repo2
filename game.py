@@ -6,17 +6,62 @@ words = ["python", "programación", "computadora", "código", "desarrollo",
 
 # Elegir una palabra al azar
 secret_word = random.choice(words)
-# Número máximo de intentos permitidos
+# Número máximo de fallos permitidos
 max_fails = 10
+
 # Lista para almacenar las letras adivinadas
 guessed_letters = []
 
+
+
+
+
 print("¡Bienvenido al juego de adivinanzas!")
+
+
+#Dificultades
+print('''Ingresa la dificultad a la que quieres jugar.
+                    F : Fácil.  En la palabra a adivinar se muestran todas las vocales por defecto.
+                    M : Medio.   Se muestra la primer y la última letra de la palabra.
+                    D : Dificil. No se muestra ninguna letra de la palabra''')
+difficulty= input().lower()
+while difficulty != 'f' and difficulty != 'm' and difficulty != 'd':
+    print('El caracter "'+difficulty+'" no es valido. Intente de nuevo.')
+    print('''Ingresa la dificultad a la que quieres jugar.
+                    F : Fácil.  En la palabra a adivinar se muestran todas las vocales por defecto.
+                    M : Medio.   Se muestra la primer y la última letra de la palabra.
+                    D : Dificil. No se muestra ninguna letra de la palabra''')
+    difficulty= input().lower()
+
+if difficulty=='f':
+    guessed_letters.append('a')
+    guessed_letters.append('e')
+    guessed_letters.append('i')
+    guessed_letters.append('o')
+    guessed_letters.append('u')
+elif difficulty=='m':
+    guessed_letters.append(secret_word[0])
+    guessed_letters.append(secret_word[len(secret_word)-1])
+    
+
 print("Estoy pensando en una palabra. ¿Puedes adivinar cuál es?")
 
 word_displayed = "_" * len(secret_word)
+
 # Mostrarla palabra parcialmente adivinada
+####print(f"Palabra: {word_displayed}")
+
+# Mostrar la palabra parcialmente adivinada
+letters = []
+for letter in secret_word:
+    if letter in guessed_letters:
+        letters.append(letter)
+    else:
+        letters.append("_")
+
+word_displayed = "".join(letters)
 print(f"Palabra: {word_displayed}")
+
 fails=0
 while fails < max_fails:
     # Pedir al jugador que ingrese una letra
